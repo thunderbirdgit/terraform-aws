@@ -62,11 +62,14 @@ After applying the Terraform configurations, verify EKS cluster and ECR repo is 
 
    Ensure that the EKS cluster is visible in the AWS Management Console and that it is in a healthy state.
 
-   <img width="1286" alt="image" src="https://github.com/user-attachments/assets/fb56758e-f698-479a-b41f-027d4ebdf786">
+   <img width="737" alt="image" src="https://github.com/user-attachments/assets/e76165bc-250a-42d4-8b0a-ac92f90baa40">
+
 
    **ECR repo for microservice**
 
    Verify that the ECR repository for your microservice has been created and is accessible in the AWS Management Console.
+
+   <img width="1432" alt="image" src="https://github.com/user-attachments/assets/aa22fc06-9046-4303-ac49-889870624ef4">
 
    <img width="753" alt="image" src="https://github.com/user-attachments/assets/b02a2494-e47b-42f4-86eb-5d36f1ba3ea6">
 
