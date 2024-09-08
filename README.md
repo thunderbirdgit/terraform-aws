@@ -45,21 +45,22 @@ Deploy
       terraform plan -var-file="terraform.dev.tfvars"
       terraform apply -var-file="terraform.dev.tfvars"
       ```
-
-       You can also execute specific module to install ECR alone
-       ```
-       terraform init
-       terraform plan -var-file="terraform.dev.tfvars" -target=module.ecr
-       terraform apply -var-file="terraform.dev.tfvars" -target=module.ecr
-       ```
+   You can also execute specific module to install ECR alone
+      ```
+      terraform init
+      terraform plan -var-file="terraform.dev.tfvars" -target=module.ecr
+      terraform apply -var-file="terraform.dev.tfvars" -target=module.ecr
+      ```
       
-5. **Verify the Setup**
+6. **Verify the Setup**
 After applying the Terraform configurations, verify EKS cluster and ECR repo is created:
 
-EKS Cluster:
+**EKS Cluster**
+
 <img width="1286" alt="image" src="https://github.com/user-attachments/assets/fb56758e-f698-479a-b41f-027d4ebdf786">
 
-ECR repo for microservice:
+**ECR repo for microservice**
+
 <img width="753" alt="image" src="https://github.com/user-attachments/assets/b02a2494-e47b-42f4-86eb-5d36f1ba3ea6">
 
 6. **Cleanup Resources**
