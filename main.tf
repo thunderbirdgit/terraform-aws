@@ -116,8 +116,3 @@ module "ecr" {
   additional_tags    = var.additional_tags
 }
 
-#module "mongodb" {
-#  source = "./modules/mongodb"
-#  namespace = var.mongodb_namespace
-#  replicas  = var.mongodb_replicas
-#}
