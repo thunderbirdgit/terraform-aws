@@ -59,6 +59,11 @@ variable "additional_tags" {
   type        = map(string)
 }
 
+variable "eks_lb_name" {
+  description = "The namespace for LB"
+  type        = string
+}
+
 variable "mongodb_namespace" {
   description = "The namespace for MongoDB"
   type        = string
@@ -68,3 +73,13 @@ variable "mongodb_replicas" {
   description = "The number of MongoDB replicas"
   type        = number
 }
+
+variable "account_id" {
+  type = string
+}
+
+/*
+variable "oidc_provider_url" {
+  type = string
+}
+*/

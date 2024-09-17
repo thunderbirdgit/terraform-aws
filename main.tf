@@ -14,6 +14,8 @@ data "aws_availability_zones" "available" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
   cluster_name = var.cluster_name
 }
@@ -33,7 +35,7 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
-
+ 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = 1
   }
@@ -76,6 +78,9 @@ module "eks" {
       min_size     = 1
       max_size     = 3
       desired_size = 2
+      iam_role_additional_policies = {
+        eks_nodegroup_policy = module.iam.eks_nodegroup_policy_arn
+      }
     }
 
     two = {
@@ -86,8 +91,12 @@ module "eks" {
       min_size     = 1
       max_size     = 2
       desired_size = 1
+      iam_role_additional_policies = {
+        eks_nodegroup_policy = module.iam.eks_nodegroup_policy_arn
+      }
     }
   }
+
 }
 
 
@@ -116,3 +125,24 @@ module "ecr" {
   additional_tags    = var.additional_tags
 }
 
+module "lb_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+
+  role_name = var.eks_lb_name
+  attach_load_balancer_controller_policy = true
+
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+}
+
+module "iam" {
+  source = "./modules/iam"
+
+  # Pass the account ID and oidc_provider_url to the IAM module
+  account_id       = data.aws_caller_identity.current.account_id
+  oidc_provider_url = module.eks.oidc_provider
+}

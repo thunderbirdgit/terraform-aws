@@ -19,6 +19,9 @@ mongodb_replicas  = 3
 # ECR Repository Name
 ecr_name          = "hw-nodejs"
 
+# ALB
+eks_lb_name = "dev_eks_lb"
+
 # Additional Tags for ECR
 additional_tags = {
   Owner       = "DevOps team"
